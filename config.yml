@@ -1,0 +1,4 @@
+serverUsernames:
+# - pvp
+# - hub
+format: '&b[Alert] '
