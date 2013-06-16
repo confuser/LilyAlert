@@ -23,14 +23,14 @@ public class AlertCommand implements CommandExecutor {
 		if (args.length == 0)
 			return false;
 
-		if (plugin.servers.size() == 0) {
-			sender.sendMessage(ChatColor.RED + "No server usernames defined for /alert in the config!");
-			return true;
-		}
-
 		if (args[0].equalsIgnoreCase("reload")) {
 			plugin.configReload();
 			sender.sendMessage(ChatColor.GREEN + "[LilyAlert] Reloaded!");
+			return true;
+		}
+
+		if (plugin.servers.size() == 0) {
+			sender.sendMessage(ChatColor.RED + "No server usernames defined for /alert in the config!");
 			return true;
 		}
 
