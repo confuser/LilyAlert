@@ -29,11 +29,6 @@ public class AlertCommand implements CommandExecutor {
 			return true;
 		}
 
-		if (plugin.servers.size() == 0) {
-			sender.sendMessage(ChatColor.RED + "No server usernames defined for /alert in the config!");
-			return true;
-		}
-
 		// Combine the message!
 		String message = "";
 
