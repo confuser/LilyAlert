@@ -42,9 +42,7 @@ public class AlertCommand implements CommandExecutor {
 		}
 
 		// Send the request to every server!
-		for (String server : plugin.servers) {
-			plugin.request(server, message.trim());
-		}
+		plugin.request(message.trim());
 
 		return true;
 	}

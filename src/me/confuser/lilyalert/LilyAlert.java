@@ -54,12 +54,12 @@ public class LilyAlert extends JavaPlugin implements Listener {
 		alertFormat = colorize(getConfig().getString("format"));
 	}
 
-	public void request(String serverName, String message) {
+	public void request(String message) {
 		Connect c = getBukkitConnect();
 		MessageRequest request = null;
 
 		try {
-			request = new MessageRequest(serverName, "alert", message);
+			request = new MessageRequest(servers, "alert", message);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
