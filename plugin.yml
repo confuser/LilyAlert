@@ -1,6 +1,6 @@
 main: me.confuser.lilyalert.LilyAlert
 name: LilyAlert
-version: 1.1
+version: 1.2
 depend: [LilyPad-Connect]
 softdepend: [BarAPI]
 commands:
