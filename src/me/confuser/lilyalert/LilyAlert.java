@@ -4,12 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import lilypad.client.connect.api.Connect;
-import lilypad.client.connect.api.MessageEvent;
-import lilypad.client.connect.api.MessageEventListener;
 import lilypad.client.connect.api.request.RequestException;
 import lilypad.client.connect.api.request.impl.MessageRequest;
-
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,21 +27,10 @@ public class LilyAlert extends JavaPlugin implements Listener {
 
 		getCommand("alert").setExecutor(new AlertCommand(this));
 
-		lilyPad.registerMessageEventListener(new MessageEventListener() {
-			public void onMessage(Connect connect, MessageEvent me) {
-				if (!me.getChannel().equals("alert")) { // name of channel
-					return;
-				}
-
-				String message = "Error";
-				try {
-					message = me.getMessageAsString();
-					Bukkit.broadcastMessage(alertFormat + message);
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		if (Bukkit.getServer().getPluginManager().getPlugin("BarAPI") != null)
+			lilyPad.registerEvents(new BarAlertEvents(this));
+		else
+			lilyPad.registerEvents(new AlertEvents(this));
 	}
 
 	// Reload
@@ -76,6 +63,10 @@ public class LilyAlert extends JavaPlugin implements Listener {
 	}
 
 	public String colorize(String string) {
-		return string.replaceAll("(?i)&([a-k0-9])", "\u00A7$1");
+		return ChatColor.translateAlternateColorCodes('&', string);
+	}
+	
+	public String getAlertFormat() {
+		return alertFormat;
 	}
 }
